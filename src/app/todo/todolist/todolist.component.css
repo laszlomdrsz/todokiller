@@ -1,0 +1,16 @@
+.todo-list-item{
+    width: 400px;
+}
+
+.todo-list-item:hover{
+    background-color: #ccc;
+}
+
+.history-tag{
+    background-color: #000088;
+    color: #fff;
+}
+
+.hidden {
+    display: none!important;
+}

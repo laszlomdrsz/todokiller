@@ -1,0 +1,47 @@
+
+<form>
+  <mat-form-field>
+      <input matInput placeholder="Add a new todo!" [(ngModel)]="newTodo.title" name="title">
+  </mat-form-field>
+  <button mat-mini-fab color="primary" (click)="addTodo()">+</button>
+
+</form>
+  <mat-card *ngFor="let todo of todos" class="todo-list-item" [class.hidden]="todo.completed || todo.eliminated">
+    <h4>{{todo.title}}</h4>
+    <p [innerHTML]="todo.history"></p>
+    <div *ngIf="showButtonArea">
+      <button title="Eliminate todo" mat-mini-fab color="primary" (click)="eliminateTodo(todo)">E</button>
+      <button title="Simplify todo" mat-mini-fab color="primary" (click)="simplifyingTodo(todo)">S</button>
+      <button title="Automate todo" mat-mini-fab color="primary" (click)="automatingTodo(todo)">A</button>
+      <button title="Delegate todo" mat-mini-fab color="primary" (click)="delegatingTodo(todo)">D</button>
+      <button title="Complete todo" mat-mini-fab color="primary" (click)="completeTodo(todo)">C</button>
+      <button title="Delete todo" mat-mini-fab color="warn" (click)="deleteTodo(todo)" class="delete-button">X</button>      
+      
+      
+    </div>
+
+    <form *ngIf="todo._simplifyingTodo === true">
+      <mat-form-field>
+          <input matInput placeholder="How can you simplify this todo?" [(ngModel)]="todo._editText" name="title">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" (click)="simplifyTodo(todo)">S</button>
+    </form>
+
+    <form *ngIf="todo._automatingTodo === true">
+      <mat-form-field>
+          <input matInput placeholder="How can you automate this todo?" [(ngModel)]="todo._editText" name="title">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" (click)="automateTodo(todo)">A</button>
+    </form>
+
+    <form *ngIf="todo._delegatingTodo === true">
+      <mat-form-field>
+          <input matInput placeholder="How can you delegate this todo?" [(ngModel)]="todo._editText" name="title">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" (click)="delegateTodo(todo)">D</button>
+    </form>
+
+
+  </mat-card>
+
+  

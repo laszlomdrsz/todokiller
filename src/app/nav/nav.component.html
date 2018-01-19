@@ -1,0 +1,9 @@
+<div class="nav-menu">
+  <button mat-button (click)="changeView('todos')">Todos</button>
+  <button mat-button (click)="changeView('goals')">Goals</button>
+  <button mat-button (click)="changeView('settings')">Settings</button>
+</div>
+
+<div class="container">
+  <app-todo *ngIf="currentView === 'todos'"></app-todo>
+</div>
