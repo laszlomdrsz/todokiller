@@ -79,6 +79,26 @@ export class TodolistComponent implements OnInit {
     todo._delegatingTodo = false;
   }
 
+  openTodo(todo) {
+    this.todos.forEach(element => {
+      element._open = false;
+    });
+    todo._open = true;
+  }
+
+  toggleOpenTodo(todo) {
+
+    if(todo._open === false) {
+      this.todos.forEach(element => {
+        element._open = false;
+      });
+      todo._open = true;
+    } else {
+      todo._open = false;
+    }
+
+  }
+
   constructor() { }
 
   ngOnInit() {

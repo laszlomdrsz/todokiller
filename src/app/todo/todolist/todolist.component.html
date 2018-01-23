@@ -6,18 +6,33 @@
   <button mat-mini-fab color="primary" (click)="addTodo()">+</button>
 
 </form>
-  <mat-card *ngFor="let todo of todos" class="todo-list-item" [class.hidden]="todo.completed || todo.eliminated">
+  <mat-card *ngFor="let todo of todos" class="todo-list-item" [class.hidden]="todo.completed || todo.eliminated" [class.open-list-item]="todo._open">
     <h4>{{todo.title}}</h4>
-    <p [innerHTML]="todo.history"></p>
-    <div *ngIf="showButtonArea">
+    <div class="hover-option-area" (mouseenter)="todo._options=true" (mouseleave)="todo._options=false">
+        <button mat-mini-fab color="primary">4</button>
+        <div class="hover-options-container" *ngIf="todo._options">
+          <div class="hover-options">
+            <button class="hover-option hover-option-1" title="Eliminate todo" mat-mini-fab color="primary" (click)="eliminateTodo(todo)">E</button>
+            <button class="hover-option hover-option-2" title="Simplify todo" mat-mini-fab color="primary" (click)="simplifyingTodo(todo)">S</button>
+            <button class="hover-option hover-option-3" title="Automate todo" mat-mini-fab color="primary" (click)="automatingTodo(todo)">A</button>
+            <button class="hover-option hover-option-4" title="Delegate todo" mat-mini-fab color="primary" (click)="completeTodo(todo)">D</button>
+          </div>
+        </div>
+    </div>
+    <br>
+    <button mat-mini-fab color="secondary" (click)="toggleOpenTodo(todo)">...</button>
+    
+    <div class="todo-history" *ngIf="todo._open">
+      <h5>Todo history</h5>
+      <p [innerHTML]="todo.history"></p>
+    </div>
+    <div *ngIf="showButtonArea && todo._open">
       <button title="Eliminate todo" mat-mini-fab color="primary" (click)="eliminateTodo(todo)">E</button>
       <button title="Simplify todo" mat-mini-fab color="primary" (click)="simplifyingTodo(todo)">S</button>
       <button title="Automate todo" mat-mini-fab color="primary" (click)="automatingTodo(todo)">A</button>
       <button title="Delegate todo" mat-mini-fab color="primary" (click)="delegatingTodo(todo)">D</button>
       <button title="Complete todo" mat-mini-fab color="primary" (click)="completeTodo(todo)">C</button>
-      <button title="Delete todo" mat-mini-fab color="warn" (click)="deleteTodo(todo)" class="delete-button">X</button>      
-      
-      
+      <button title="Delete todo" mat-mini-fab color="warn" (click)="deleteTodo(todo)" class="delete-button">X</button>  
     </div>
 
     <form *ngIf="todo._simplifyingTodo === true">

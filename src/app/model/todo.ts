@@ -11,4 +11,6 @@ export class Todo {
     _simplifyingTodo: boolean;
     _automatingTodo: boolean;
     _editText: string;
+    _open = false;
+    _options = false;
 }

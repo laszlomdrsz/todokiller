@@ -6,6 +6,14 @@
     background-color: #ccc;
 }
 
+.open-list-item {
+    background-color: #eee;
+}
+
+.open-list-item:hover{
+    background-color: #eee;
+}
+
 .history-tag{
     background-color: #000088;
     color: #fff;
@@ -13,4 +21,41 @@
 
 .hidden {
     display: none!important;
+}
+
+.todo-history p {
+    font-size: 12px;
+}
+
+.hover-options-container{
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    top: 35px;
+    left: -80px;
+}
+
+.hover-options{
+    margin: auto;
+    text-align: center;
+}
+
+
+
+
+.hover-option-area {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+
+}
+
+mat-card h4 {
+    display: inline-block;
+}
+
+mat-card{
+    position: relative;
 }
