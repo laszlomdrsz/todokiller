@@ -1,0 +1,8 @@
+<h4>Eliminated todos</h4>
+
+<mat-list>
+  <mat-list-item *ngFor="let todo of eliminatedTodos">
+    <span class="title">{{todo.title}}</span><mat-icon (click)="uneliminateTodo(todo)">check</mat-icon>
+    <button mat-icon-button (click)="uneliminateTodo(todo)"><mat-icon>replay</mat-icon></button>
+  </mat-list-item>
+</mat-list>

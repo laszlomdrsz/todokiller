@@ -1,0 +1,15 @@
+mat-card {
+    width: 100%;
+}
+
+.sidebar-right {
+    float: right;
+    width: 400px;
+    margin-right: 28px;
+}
+
+.main-content {
+    float: left;
+    margin-bottom: 30px;
+}
+

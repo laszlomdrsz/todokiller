@@ -13,6 +13,11 @@ import { NavComponent } from './nav/nav.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodolistComponent } from './todo/todolist/todolist.component';
 import { TodokillerComponent } from './todo/todokiller/todokiller.component';
+import { CompletedTodosComponent } from './todo/completed-todos/completed-todos.component';
+import { TodoMessageService } from './todo/todo-message.service';
+import { MatIconModule } from '@angular/material/icon';
+import { EliminatedTodosComponent } from './todo/eliminated-todos/eliminated-todos.component';
+import {FocusModule} from 'angular2-focus';
 
 @NgModule({
   declarations: [
@@ -20,18 +25,24 @@ import { TodokillerComponent } from './todo/todokiller/todokiller.component';
     NavComponent,
     TodoComponent,
     TodolistComponent,
-    TodokillerComponent
+    TodokillerComponent,
+    CompletedTodosComponent,
+    EliminatedTodosComponent
   ],
   imports: [
     BrowserModule,
     MatButtonModule,
     MatListModule,
     MatInputModule,
+    MatIconModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    FocusModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    TodoMessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

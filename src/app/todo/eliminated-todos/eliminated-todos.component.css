@@ -1,0 +1,21 @@
+mat-list-item .title{
+    text-decoration: line-through;
+}
+
+mat-list-item mat-icon{
+    color: rgb(28, 173, 28);
+}
+
+button mat-icon {
+    color: #444;
+}
+
+.mat-list-item {
+    margin-bottom: -20px;
+    word-break: break-all;
+}
+
+h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}

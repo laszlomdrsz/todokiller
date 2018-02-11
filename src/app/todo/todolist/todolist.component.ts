@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Todo } from '../../model/todo';
+import { TodoMessageService } from '../todo-message.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-todolist',
@@ -15,6 +17,19 @@ export class TodolistComponent implements OnInit {
 
   showButtonArea = true;
 
+  completedTodos: Todo[] = [];
+  eliminatedTodos: Todo[] = [];
+
+  uncompletedTodoSub: Subscription;
+  uneliminatedTodoSub: Subscription;
+
+
+  constructor(
+    private todoMessageService: TodoMessageService
+  ) {
+    this.uncompletedTodoSub = this.todoMessageService.getUncompletedTodo().subscribe(result => this.todos.push(result));
+    this.uneliminatedTodoSub = this.todoMessageService.getUneliminatedTodo().subscribe(result => this.todos.push(result));
+   }
 
 
   addTodo() {
@@ -31,17 +46,24 @@ export class TodolistComponent implements OnInit {
   }
 
   eliminateTodo(todo) {
-    todo.eliminated = true;
     todo.history += ' <span class="history-tag">Eliminated</span>';
+    this.todos.splice(this.todos.indexOf(todo), 1);
+    this.eliminatedTodos.push(todo);
+    this.refreshEliminatedTodos();
   }
 
   completeTodo(todo) {
-    todo.completed = true;
     todo.history += ' <span class="history-tag">Completed</span>';
+    this.todos.splice(this.todos.indexOf(todo), 1);
+    this.completedTodos.push(todo);
+    this.refreshCompletedTodos();
   }
 
   simplifyingTodo(todo) {
     this.showButtonArea = false;
+    // Megszünteti a többi szerkésztést
+    todo._automatingTodo = false;
+    todo._delegatingTodo = false;
     todo._simplifyingTodo = true;
     todo._editText = '';
   }
@@ -55,6 +77,9 @@ export class TodolistComponent implements OnInit {
 
   automatingTodo(todo) {
     this.showButtonArea = false;
+    // Megszünteti a többi szerkésztést
+    todo._simplifyingTodo = false;
+    todo._delegatingTodo = false;
     todo._automatingTodo = true;
     todo._editText = '';
   }
@@ -68,6 +93,9 @@ export class TodolistComponent implements OnInit {
 
   delegatingTodo(todo) {
     this.showButtonArea = false;
+    // Megszünteti a többi szerkésztést
+    todo._automatingTodo = false;
+    todo._simplifyingTodo = false;
     todo._delegatingTodo = true;
     todo._editText = '';
   }
@@ -88,7 +116,7 @@ export class TodolistComponent implements OnInit {
 
   toggleOpenTodo(todo) {
 
-    if(todo._open === false) {
+    if (todo._open === false) {
       this.todos.forEach(element => {
         element._open = false;
       });
@@ -99,7 +127,17 @@ export class TodolistComponent implements OnInit {
 
   }
 
-  constructor() { }
+  // Ezzel megkapja a todoMessageService a változásokat
+  refreshCompletedTodos() {
+    this.todoMessageService.completedTodos.next(this.completedTodos);
+  }
+
+  refreshEliminatedTodos() {
+    this.todoMessageService.eliminatedTodos.next(this.eliminatedTodos);
+  }
+
+
+
 
   ngOnInit() {
   }

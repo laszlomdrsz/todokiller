@@ -1,0 +1,8 @@
+<h4>Completed todos</h4>
+
+<mat-list>
+  <mat-list-item *ngFor="let todo of completedTodos">
+    <span class="title">{{todo.title}}</span><mat-icon >check</mat-icon>
+    <button mat-icon-button (click)="uncompleteTodo(todo)"><mat-icon>replay</mat-icon></button>
+  </mat-list-item>
+</mat-list>

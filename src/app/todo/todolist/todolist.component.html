@@ -1,3 +1,4 @@
+<h2>Current todos</h2>
 
 <form>
   <mat-form-field>
@@ -6,10 +7,15 @@
   <button mat-mini-fab color="primary" (click)="addTodo()">+</button>
 
 </form>
+<div class="todo-area">
+ 
   <mat-card *ngFor="let todo of todos" class="todo-list-item" [class.hidden]="todo.completed || todo.eliminated" [class.open-list-item]="todo._open">
     <h4>{{todo.title}}</h4>
+    <button mat-mini-fab color="secondary" class="option-button" (click)="toggleOpenTodo(todo)">...</button>
     <div class="hover-option-area" (mouseenter)="todo._options=true" (mouseleave)="todo._options=false">
+        
         <button mat-mini-fab color="primary">4</button>
+        
         <div class="hover-options-container" *ngIf="todo._options">
           <div class="hover-options">
             <button class="hover-option hover-option-1" title="Eliminate todo" mat-mini-fab color="primary" (click)="eliminateTodo(todo)">E</button>
@@ -20,7 +26,6 @@
         </div>
     </div>
     <br>
-    <button mat-mini-fab color="secondary" (click)="toggleOpenTodo(todo)">...</button>
     
     <div class="todo-history" *ngIf="todo._open">
       <h5>Todo history</h5>
@@ -37,26 +42,31 @@
 
     <form *ngIf="todo._simplifyingTodo === true">
       <mat-form-field>
-          <input matInput placeholder="How can you simplify this todo?" [(ngModel)]="todo._editText" name="title">
+          <input matInput placeholder="How can you simplify this todo?" [(ngModel)]="todo._editText" name="title" focus="todo._simplifyingTodo">
       </mat-form-field>
       <button mat-mini-fab color="primary" (click)="simplifyTodo(todo)">S</button>
+      <button mat-mini-fab color="primary" (click)="todo._simplifyingTodo = false"><mat-icon>arrow_back</mat-icon></button>
     </form>
 
     <form *ngIf="todo._automatingTodo === true">
       <mat-form-field>
-          <input matInput placeholder="How can you automate this todo?" [(ngModel)]="todo._editText" name="title">
+          <input matInput placeholder="How can you automate this todo?" [(ngModel)]="todo._editText" name="title" focus="todo._automatingTodo">
       </mat-form-field>
       <button mat-mini-fab color="primary" (click)="automateTodo(todo)">A</button>
+      <button mat-mini-fab color="primary" (click)="todo._automatingTodo = false"><mat-icon>arrow_back</mat-icon></button>
     </form>
 
     <form *ngIf="todo._delegatingTodo === true">
       <mat-form-field>
-          <input matInput placeholder="How can you delegate this todo?" [(ngModel)]="todo._editText" name="title">
+          <input matInput placeholder="How can you delegate this todo?" [(ngModel)]="todo._editText" name="title" focus="todo._delegatingTodo">
       </mat-form-field>
       <button mat-mini-fab color="primary" (click)="delegateTodo(todo)">D</button>
+      <button mat-mini-fab color="primary" (click)="todo._delegatingTodo = false"><mat-icon>arrow_back</mat-icon></button>
     </form>
 
 
   </mat-card>
+
+</div>
 
   
