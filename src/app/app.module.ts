@@ -17,7 +17,7 @@ import { CompletedTodosComponent } from './todo/completed-todos/completed-todos.
 import { TodoMessageService } from './todo/todo-message.service';
 import { MatIconModule } from '@angular/material/icon';
 import { EliminatedTodosComponent } from './todo/eliminated-todos/eliminated-todos.component';
-import {FocusModule} from 'angular2-focus';
+import { SedaMessageData } from './data/seda-message-data';
 
 @NgModule({
   declarations: [
@@ -37,11 +37,11 @@ import {FocusModule} from 'angular2-focus';
     MatIconModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    FocusModule.forRoot()
+    MatCardModule
   ],
   providers: [
-    TodoMessageService
+    TodoMessageService,
+    SedaMessageData
   ],
   bootstrap: [AppComponent]
 })

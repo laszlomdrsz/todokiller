@@ -1,8 +1,8 @@
-.todo-list-item{
+.todo-list-item {
     width: 400px;
 }
 
-.todo-list-item:hover{
+.todo-list-item:hover {
     background-color: #ccc;
 }
 
@@ -10,11 +10,11 @@
     background-color: #eee;
 }
 
-.open-list-item:hover{
+.open-list-item:hover {
     background-color: #eee;
 }
 
-.history-tag{
+.history-tag {
     background-color: #000088;
     color: #fff;
 }
@@ -27,7 +27,7 @@
     font-size: 12px;
 }
 
-.hover-options-container{
+.hover-options-container {
     position: absolute;
     width: 200px;
     height: 60px;
@@ -36,7 +36,7 @@
     z-index: 15;
 }
 
-.hover-options{
+.hover-options {
     margin: auto;
     text-align: center;
     z-index: 15;
@@ -55,7 +55,15 @@ mat-card {
     top: 10px;
 }
 
+.complete-button {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
 
+.complete-button:hover {
+    color: rgb(11, 179, 11);
+}
 
 .hover-option-area {
     position: absolute;
@@ -76,7 +84,47 @@ mat-card h4 {
     word-break: break-all;
 }
 
-mat-card{
+mat-card {
     position: relative;
 }
 
+#new-todo-field {
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.seda-message {
+    position: absolute;
+    width: 200px;
+    left: 470px;
+    top: -30px;
+    color: #fff;
+}
+
+.speech-bubble {
+    position: relative;
+    background: #4377E7;
+    border-radius: .4em;
+    padding: 10px;
+    width: auto;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 25px solid transparent;
+    border-right-color: #4377E7;
+    border-left: 0;
+    border-bottom: 0;
+    margin-top: -12.5px;
+    margin-left: -25px;
+}
+
+.seda-message-no-button {
+    color: #FFF;
+    float: right;
+}

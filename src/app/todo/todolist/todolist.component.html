@@ -1,8 +1,8 @@
 <h2>Current todos</h2>
 
 <form>
-  <mat-form-field>
-      <input matInput placeholder="Add a new todo!" [(ngModel)]="newTodo.title" name="title">
+  <mat-form-field id="new-todo-field">
+      <input matInput placeholder="Add a new todo!" [(ngModel)]="newTodo.title" name="title" >
   </mat-form-field>
   <button mat-mini-fab color="primary" (click)="addTodo()">+</button>
 
@@ -12,6 +12,8 @@
   <mat-card *ngFor="let todo of todos" class="todo-list-item" [class.hidden]="todo.completed || todo.eliminated" [class.open-list-item]="todo._open">
     <h4>{{todo.title}}</h4>
     <button mat-mini-fab color="secondary" class="option-button" (click)="toggleOpenTodo(todo)">...</button>
+    <button class="complete-button" title="Complete todo" mat-mini-fab color="secondary" (click)="completeTodo(todo)"><mat-icon>check</mat-icon></button>
+    <!-- 
     <div class="hover-option-area" (mouseenter)="todo._options=true" (mouseleave)="todo._options=false">
         
         <button mat-mini-fab color="primary">4</button>
@@ -25,6 +27,7 @@
           </div>
         </div>
     </div>
+     -->
     <br>
     
     <div class="todo-history" *ngIf="todo._open">
@@ -45,7 +48,7 @@
           <input matInput placeholder="How can you simplify this todo?" [(ngModel)]="todo._editText" name="title" focus="todo._simplifyingTodo">
       </mat-form-field>
       <button mat-mini-fab color="primary" (click)="simplifyTodo(todo)">S</button>
-      <button mat-mini-fab color="primary" (click)="todo._simplifyingTodo = false"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="cancelSeda(todo)"><mat-icon>arrow_back</mat-icon></button>
     </form>
 
     <form *ngIf="todo._automatingTodo === true">
@@ -53,7 +56,7 @@
           <input matInput placeholder="How can you automate this todo?" [(ngModel)]="todo._editText" name="title" focus="todo._automatingTodo">
       </mat-form-field>
       <button mat-mini-fab color="primary" (click)="automateTodo(todo)">A</button>
-      <button mat-mini-fab color="primary" (click)="todo._automatingTodo = false"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="cancelSeda(todo)"><mat-icon>arrow_back</mat-icon></button>
     </form>
 
     <form *ngIf="todo._delegatingTodo === true">
@@ -61,12 +64,24 @@
           <input matInput placeholder="How can you delegate this todo?" [(ngModel)]="todo._editText" name="title" focus="todo._delegatingTodo">
       </mat-form-field>
       <button mat-mini-fab color="primary" (click)="delegateTodo(todo)">D</button>
-      <button mat-mini-fab color="primary" (click)="todo._delegatingTodo = false"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="cancelSeda(todo)"><mat-icon>arrow_back</mat-icon></button>
     </form>
 
+    <div class="seda-message" *ngIf="todo._sedaMessage">
+      <div class="speech-bubble">
+        <span>{{todo._sedaMessage}}</span> <br>
+        <button *ngIf="todo._sedaMessageType === 'Eliminate'" title="Eliminate todo" mat-mini-fab color="primary" (click)="sedaMessageAction(todo, todo._sedaMessageType)">E</button>
+        <button *ngIf="todo._sedaMessageType === 'Simplify'" title="Simplify todo" mat-mini-fab color="primary" (click)="sedaMessageAction(todo, todo._sedaMessageType)">S</button>
+        <button *ngIf="todo._sedaMessageType === 'Automate'" title="Automate todo" mat-mini-fab color="primary" (click)="sedaMessageAction(todo, todo._sedaMessageType)">A</button>
+        <button *ngIf="todo._sedaMessageType === 'Delegate'" title="Delegate todo" mat-mini-fab color="primary" (click)="sedaMessageAction(todo, todo._sedaMessageType)">D</button>
+        <button title="No" mat-icon-button color="secondary" (click)="exitSedaMessage(todo)" class="seda-message-no-button">No :(</button>
+      </div>
+    </div>
 
   </mat-card>
 
 </div>
+
+
 
   

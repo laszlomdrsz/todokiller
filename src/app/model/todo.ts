@@ -1,3 +1,4 @@
+
 export class Todo {
     id: number;
     title: string;
@@ -13,4 +14,6 @@ export class Todo {
     _editText: string;
     _open = false;
     _options = false;
+    _sedaMessage: string;
+    _sedaMessageType: string;
 }
