@@ -10,9 +10,7 @@ const index = path.join(__dirname, 'dist', 'index.html');
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('**', (req, res, next) => {
-    if (req.session.user) {   
         res.sendFile(index);
-    }
 });
 
 
